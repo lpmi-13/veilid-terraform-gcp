@@ -6,7 +6,7 @@ This terraform configuration will help you do that!
 
 ## Setting up access
 
-1. Sign up for a GCP account you don't already have one and create a project. Just call it whatever you want, but use that value in the `provider` block in `main.tf`.
+1. Sign up for a GCP account if you don't already have one and create a project. Just call it whatever you want, but use that value in the `provider` block in `main.tf`.
 
 2. Install the gcloud cli. The docs [here](https://cloud.google.com/sdk/docs/install) are very good and easy to follow.
 
