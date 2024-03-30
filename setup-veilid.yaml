@@ -15,4 +15,4 @@ write_files:
     path: /etc/crontab
     content: |
         0 5 * * 3 root /usr/bin/apt update -y
-        5 5 * * 3 root /usr/bin/apt upgrade -y veilid-server veilid-cli
+        5 5 * * 3 root /usr/bin/apt install --only-upgrade veilid-server veilid-cli -y
