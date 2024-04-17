@@ -25,10 +25,11 @@ resource "google_compute_network" "veilid_vpc" {
 }
 
 resource "google_compute_subnetwork" "veilid_subnet" {
-  name          = "veilid-subnet"
-  ip_cidr_range = "10.0.0.0/24"
-  region        = "us-west1"
-  network       = google_compute_network.veilid_vpc.id
+  name             = "veilid-subnet"
+  ip_cidr_range    = "10.0.0.0/24"
+  region           = "us-west1"
+  network          = google_compute_network.veilid_vpc.id
+  ipv6_access_type = "EXTERNAL"
 }
 
 resource "google_compute_firewall" "veilid_ports" {
