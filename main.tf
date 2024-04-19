@@ -18,55 +18,6 @@ provider "google" {
   zone   = "us-west1-c"
 }
 
-resource "google_compute_network" "veilid_vpc" {
-  project                 = "veilid-nodes"
-  name                    = "veilid-network"
-  auto_create_subnetworks = false
-}
-
-resource "google_compute_subnetwork" "veilid_subnet" {
-  name             = "veilid-subnet"
-  ip_cidr_range    = "10.0.0.0/24"
-  region           = "us-west1"
-  network          = google_compute_network.veilid_vpc.id
-  ipv6_access_type = "EXTERNAL"
-}
-
-resource "google_compute_firewall" "veilid_ports_ipv4" {
-  provider = google
-  name     = "inbound-connections-ipv4"
-  network  = google_compute_network.veilid_vpc.name
-
-  source_ranges = ["0.0.0.0/0"]
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22", "5150", "5151"]
-  }
-
-  allow {
-    protocol = "udp"
-    ports    = ["5150", "5151"]
-  }
-}
-
-resource "google_compute_firewall" "veilid_ports_ipv6" {
-  provider = google
-  name     = "inbound-connections-ipv6"
-  network  = google_compute_network.veilid_vpc.name
-
-  source_ranges = ["::/0"]
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22", "5150", "5151"]
-  }
-
-  allow {
-    protocol = "udp"
-    ports    = ["5150", "5151"]
-  }
-}
 
 resource "google_compute_instance" "veilid" {
   # I used a for_each here just because that's easiest to use no matter which value is uncommented in the
@@ -86,7 +37,7 @@ resource "google_compute_instance" "veilid" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.veilid_subnet.name
+    subnetwork = google_compute_subnetwork.veilid_subnet[each.key].name
     stack_type = "IPV4_IPV6"
 
     access_config {
