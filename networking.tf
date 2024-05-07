@@ -26,12 +26,12 @@ resource "google_compute_firewall" "veilid_ports_ipv4" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22", "5150", "5151"]
+    ports    = ["22", "5150"]
   }
 
   allow {
     protocol = "udp"
-    ports    = ["5150", "5151"]
+    ports    = ["5150"]
   }
 }
 
@@ -45,11 +45,11 @@ resource "google_compute_firewall" "veilid_ports_ipv6" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22", "5150", "5151"]
+    ports    = ["22", "5150"]
   }
 
   allow {
     protocol = "udp"
-    ports    = ["5150", "5151"]
+    ports    = ["5150"]
   }
 }
