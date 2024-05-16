@@ -1,6 +1,6 @@
 
 resource "google_compute_network" "veilid_vpc" {
-  project                 = "veilid-nodes"
+  project                 = local.project_name
   name                    = "veilid-network"
   auto_create_subnetworks = false
 }

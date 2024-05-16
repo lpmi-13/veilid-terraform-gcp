@@ -10,7 +10,9 @@ Because GCP doesn't (currently) charge for ephemeral ipv4 addresses, we can run 
 
 ## Setting up access
 
-1. Sign up for a GCP account if you don't already have one and create a project. Just call it whatever you want, but use that value in the `provider` block in `main.tf`.
+1. Sign up for a GCP account if you don't already have one and create a project. Just call it whatever you want, but use that value for `project_name` in `locals.tf`. You can create a new project by navigating to the cloud dashboard (see screenshot below):
+
+![cloud-dashboard](create-project.png)
 
 2. Install the gcloud cli. The docs [here](https://cloud.google.com/sdk/docs/install) are very good and easy to follow.
 
@@ -18,13 +20,15 @@ Because GCP doesn't (currently) charge for ephemeral ipv4 addresses, we can run 
 
 ## Running the terraform commands
 
-1. Add your public SSH key to the metadata in `main.tf` in the format of `"USER:PUBLIC_SSH_KEY_CONTENTS"`. I've left the `veilid` user in there by default, but you can specify whichever username you want.
+1. You will either need to create a project called "veilid-nodes" or update the project name in `locals.tf` to use an existing project.
+
+2. Add your public SSH key to the metadata in `main.tf` in the format of `"USER:PUBLIC_SSH_KEY_CONTENTS"`. I've left the `veilid` user in there by default, but you can specify whichever username you want.
 
 > If you want to use a separate SSH key, then generate one in this folder like `ssh-keygen -t ed25519 -o -a 100 -f veilid-key`.
 
-2. Decide which region(s) you want to run a veilid node in, and uncomment the relevant line(s) in the `locals.free_regions` block in `regions.tf`. NOTE: only the regions in `free_regions` qualify for the free tier, so use one of those unless you want to spin up a bunch of nodes and pay more.
+3. Decide which region(s) you want to run a veilid node in, and uncomment the relevant line(s) in the `locals.free_regions` block in `locals.tf`. NOTE: only the regions in `free_regions` qualify for the free tier, so use one of those unless you want to spin up a bunch of nodes and pay more.
 
-3. Run the terraform command and get a/some shiny new node(s)!
+4. Run the terraform command and get a/some shiny new node(s)!
 
 ```sh
 terraform init && terraform apply

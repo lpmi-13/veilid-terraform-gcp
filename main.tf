@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "google" {
-  project = "veilid-nodes"
+  project = local.project_name
   # the region and zone here are just the default, and won't need to change if you want to run a
   # VM in a different zone, eg - us-central1-c, though you WILL need to change the configuration for
   # the google_compute_subnetwork, since those are in specific regions.

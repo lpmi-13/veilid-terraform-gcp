@@ -1,4 +1,8 @@
 locals {
+  # You'll either need to create a project with this name, or just update this
+  # to be the same name as the project you created.
+  project_name = "veilid-nodes"
+
   # uncomment the region(s) where you want to set up a veilid node
   # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   # !!!!!ONLY ONE OF THESE WILL BE FREE!!!!!
