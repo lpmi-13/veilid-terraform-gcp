@@ -18,6 +18,19 @@ provider "google" {
   zone   = "us-west1-c"
 }
 
+resource "google_project" "veilid-nodes" {
+  name = local.project_name
+  # these don't have to be the same, but it's simpler this way. Feel free to change the project ID
+  # if you want, though you won't really need to use it for anything.
+  project_id      = local.project_name
+  billing_account = data.google_billing_account.veilid.id
+}
+
+data "google_billing_account" "veilid" {
+  # this is the default billing account that gets created
+  display_name = "My Billing Account"
+  open         = true
+}
 
 resource "google_compute_instance" "veilid" {
   # I used a for_each here just because that's easiest to use no matter which value is uncommented in the
