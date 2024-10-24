@@ -1,6 +1,6 @@
 # Veilid Terraform GCP
 
-Because GCP has a free tier, we can run a super tiny VM for free. And Veilid-Server is a super low resource consumer, so we can easily run a node to sustain and grow the network.
+Because GCP has a free tier, we can run a super tiny VM for free. And [Veilid-Server](https://veilid.com) is a super low resource consumer, so we can easily run a node to sustain and grow the network.
 
 This terraform configuration will help you do that!
 
