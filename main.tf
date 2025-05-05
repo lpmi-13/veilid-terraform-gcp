@@ -4,7 +4,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = ">= 5.7.0"
+      version = ">= 6.33.0"
     }
   }
 }
@@ -24,6 +24,19 @@ resource "google_project" "veilid-nodes" {
   # if you want, though you won't really need to use it for anything.
   project_id      = local.project_name
   billing_account = data.google_billing_account.veilid.id
+  deletion_policy = "DELETE"
+}
+
+resource "google_project_service" "compute_api" {
+  project = local.project_name
+  service = "compute.googleapis.com"
+
+  timeouts {
+    create = "30m"
+    update = "40m"
+  }
+
+  disable_on_destroy = true
 }
 
 data "google_billing_account" "veilid" {
